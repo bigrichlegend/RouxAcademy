@@ -1,0 +1,23 @@
+{
+  "name": "rouxacademy",
+  "version": "1.0.0",
+  "description": "A site for artists",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "node app/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigrichlegend/RouxAcademy.git"
+  },
+  "author": "Sir Bigrich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bigrichlegend/RouxAcademy/issues"
+  },
+  "homepage": "https://github.com/bigrichlegend/RouxAcademy#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
