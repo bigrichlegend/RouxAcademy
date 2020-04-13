@@ -7,52 +7,23 @@ const express = require("express");
 
 const app = express();
 
-//This is a file and not a library so use path relative to current file
+//This is a file and not a library so use path relative to current file. We pass this down to the
+//speakers route using app.set
 const dataFile = require("./data/data.json");
 
 //Use the 'set' verb to set the port number for the server we need this for the server
 app.set("port", process.env.PORT || 3000);
 
-//Use one of the many "verbs" available. So use the "get" verb to perform routing.
-//When '/' is pressed the function runs
+//This makes dataFile available to the entire application
+app.set("appData", dataFile);
 
-app.get("/", function (req, res) {
-  res.send(`<h2>Welcome to Roux Academy Meetups</h2>`);
-});
+//We want to use index.js file so use verb "use" to get it. When you are in a Folder
+//relative paths are accessed using ./
 
-app.get("/speakers", function (req, res) {
-  //When '/' is pressed a resPONSE is 'sent'
-  var info = "";
-
-  //dataFile is a JSON object so use dot(.) notation to access properties
-  //speakers is an array of objects so use function foreach defined on array
-  dataFile.speakers.forEach(function (item) {
-    //The object for this array is passed in as the 'item' and we operate on it
-    info += `
-    <li>
-      <h2>${item.name}</h2>
-      <p>${item.summary}</p>
-    </l1>
-    `;
-  });
-
-  res.send(`
-    <h2>Roux Academy Meetups</h2>
-    ${info}
-    `);
-});
-
-app.get("/speakers/:speakerid", function (req, res) {
-  //dataFile is a JSON object so use dot(.) notation to access properties
-  //speakers is an array of objects so use function foreach defined on array
-  var speaker = dataFile.speakers[req.params.speakerid];
-
-  res.send(`
-    <h2>${speaker.title}</h2>
-    <h3>${speaker.name}</h3>
-    <p>${speaker.summary}</p>
-    `);
-});
+app.use(require("./routes/index"));
+app.use(require("./routes/speakers"));
+//app.use(require("./routes/speakers/:speakerid"));
+app.use(require("./routes/speaker"));
 
 //We need a server to process and output our response so we create one using the
 //'listen' verb.Use the 'get' verb to get PORT number
