@@ -11,16 +11,19 @@ router.get("/speakers", function (req, res) {
   dataFile.speakers.forEach(function (item) {
     //The object for this array is passed in as the 'item' and we operate on it
     info += `
-    <li>
-      <h2>${item.name}</h2>
-      <p>${item.summary}</p>
-    </l1>
+        <li>
+            <h2>Big up: ${item.name}</h2>
+            <img src="/images/speakers/${item.shortname}_tn.jpg" alt="speaker" />
+            <p>${item.summary}</p>
+        </l1>
     `;
   });
 
   res.send(`
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <h2>Roux Academy Meetups</h2>
     ${info}
+    <script src="/reload/reload.js"></script>
     `);
 });
 

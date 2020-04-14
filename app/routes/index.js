@@ -3,17 +3,21 @@ const express = require("express");
 
 const router = express.Router();
 
-//Use one of the many "verbs" available. So use the "get" verb to perform routing.
-//When '/' is pressed the function runs
-/*
-app.get("/", function (req, res) {
-    res.send(`<h2>Welcome to Roux Academy Meetups</h2>`);
-});
-*/
-
+//Using "verb" get. So use the "get" verb to perform routing. When '/' is pressed the function runs
 //Use the get() on the router instead now
+
 router.get("/", function (req, res) {
-  res.send(`<h2>Welcome to Roux Academy Meetups</h2>`);
+  var dataFile = req.app.get("appData");
+  var pagePhotos = [];
+
+  dataFile.speakers.forEach(function (item) {
+    pagePhotos = pagePhotos.concat(item.artwork);
+  });
+  res.render("index", {
+    pageTitle: "Home",
+    artwork: pagePhotos,
+    pageID: "home",
+  });
 });
 
 //This "module" is from node and we must export
